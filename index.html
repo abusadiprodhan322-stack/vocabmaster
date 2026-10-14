@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1246d8">
+<title>VocabMaster — SSC + Spoken English</title>
+<style>
+:root{--blue:#1555e8;--navy:#10234f;--bg:#f4f7ff;--card:#fff;--muted:#64748b;--green:#13864a;--red:#d9364f;--line:#dfe7fb}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Bengali",Arial,sans-serif;background:var(--bg);color:#152447}
+header{background:linear-gradient(135deg,#1239a7,#1765f5);color:white;padding:22px 18px 24px;border-radius:0 0 25px 25px}
+.brand{font-size:23px;font-weight:850;letter-spacing:.2px}.tag{opacity:.9;font-size:13px;margin-top:3px}.toprow{display:flex;align-items:center;justify-content:space-between}.pill{background:#ffffff22;border:1px solid #ffffff55;border-radius:20px;padding:6px 10px;font-size:12px}
+main{max-width:760px;margin:auto;padding:15px 14px 90px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:-8px}.stat,.panel,.wordcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 4px 16px #1c39720b}.stat strong{display:block;font-size:22px;color:var(--blue)}.stat span{font-size:12px;color:var(--muted)}
+nav{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:17px 0}.navbtn,button,select,input{font:inherit}.navbtn{border:1px solid var(--line);background:white;border-radius:12px;padding:10px 4px;font-size:12px;color:#31446b}.navbtn.active{background:#e6efff;color:var(--blue);border-color:#a9c5ff;font-weight:750}
+h2{font-size:19px;margin:5px 0 12px}h3{font-size:15px;margin:0 0 8px}.muted{color:var(--muted);font-size:13px}.panel{margin:12px 0}.primary,.secondary,.good,.bad{border:0;border-radius:12px;padding:12px 14px;cursor:pointer;font-weight:700}.primary{background:var(--blue);color:#fff;width:100%}.secondary{background:#eaf1ff;color:var(--blue)}.good{background:#e1f8e9;color:var(--green)}.bad{background:#ffebee;color:var(--red)}.row{display:flex;gap:8px;align-items:center}.row>*{flex:1}.word{font-size:29px;font-weight:850;color:var(--navy);overflow-wrap:anywhere}.meaning{font-size:21px;font-weight:750;margin:8px 0}.example{background:#eff8ff;padding:12px;border-radius:12px;margin:10px 0;font-size:14px}.example b{color:var(--blue)}.tagline{font-size:12px;color:#52678f}.choice{display:block;text-align:left;width:100%;margin:8px 0;padding:12px;border:1px solid var(--line);border-radius:12px;background:white;color:#1b2a49}.choice:active{background:#eaf1ff}.choice.correct{border-color:#35ae70;background:#e8fff0}.choice.wrong{border-color:#e25b6a;background:#fff0f1}.field{width:100%;padding:12px;border:1px solid #cbd8f3;border-radius:11px;background:white;margin:6px 0 12px}.progress{height:9px;background:#e7edfa;border-radius:99px;overflow:hidden}.progress>div{height:100%;background:linear-gradient(90deg,#16a66a,#43d99b);width:0%}.wordrow{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:11px 0;border-bottom:1px solid #edf1fb}.wordrow:last-child{border:0}.smallbtn{border:0;border-radius:9px;padding:7px 9px;background:#edf3ff;color:var(--blue);font-size:12px}.hidden{display:none!important}.notice{padding:12px;background:#fff7df;border-radius:12px;color:#735414;font-size:13px}.footer{text-align:center;color:#8793ad;font-size:11px;margin-top:22px}
+@media(min-width:600px){main{padding-top:22px}.navbtn{font-size:14px}.panel{padding:18px}}
+</style>
+
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<meta name="description" content="Free SSC and Spoken English vocabulary practice with Bangla meanings, quizzes and revision.">
+
+</head>
+<body>
+<header><div class="toprow"><div><div class="brand">📘 VocabMaster</div><div class="tag">SSC + Spoken English • বাংলা সহ শেখো</div></div><div class="pill">FREE • Offline</div></div></header>
+<main>
+<section class="stats">
+ <div class="stat"><strong id="learnedStat">0</strong><span>শেখা শব্দ</span></div>
+ <div class="stat"><strong id="weakStat">0</strong><span>আবার শিখতে হবে</span></div>
+ <div class="stat"><strong id="streakStat">0</strong><span>আজকের সঠিক উত্তর</span></div>
+</section>
+<nav>
+<button class="navbtn active" data-page="home">🏠 Home</button><button class="navbtn" data-page="learn">📚 Words</button><button class="navbtn" data-page="quiz">🧠 Quiz</button><button class="navbtn" data-page="progress">📈 Progress</button>
+</nav>
+<section id="home" class="page">
+ <div class="panel"><h2>আসসালামু আলাইকুম, Learner! 👋</h2><p class="muted">প্রতিদিন অল্প অল্প করে শিখো। নিয়মিত Revision-ই শব্দ মনে রাখার সবচেয়ে ভালো উপায়।</p><div class="progress"><div id="homeProgress"></div></div><p class="muted" id="progressText">আজ শুরু করো — ১০টি শব্দ অনুশীলন করো।</p><button class="primary" onclick="showPage('learn')">আজকের শব্দ শেখা শুরু করো →</button></div>
+ <div class="panel"><h3>🎯 আজকের লক্ষ্য</h3><div class="row"><button class="secondary" onclick="setGoal(5)">৫ শব্দ</button><button class="secondary" onclick="setGoal(10)">১০ শব্দ</button><button class="secondary" onclick="setGoal(15)">১৫ শব্দ</button></div><p class="muted" id="goalText">দৈনিক লক্ষ্য: ১০টি শব্দ</p></div>
+ <div class="panel"><h3>💡 শেখার নিয়ম</h3><p class="muted">১. শব্দের অর্থ দেখো → ২. উদাহরণ পড়ো → ৩. নিজে কুইজ দাও → ৪. ভুল শব্দ আবার অনুশীলন করো।</p></div>
+ <div class="notice">তোমার শেখার তথ্য এই ডিভাইসের ব্রাউজারে সেভ হবে। Browser data মুছে ফেললে অগ্রগতিও মুছে যেতে পারে।</div>
+</section>
+<section id="learn" class="page hidden">
+ <div class="panel"><div class="toprow"><h2>📚 Daily Vocabulary</h2><span class="pill" style="background:#eaf1ff;color:#1555e8;border-color:#cbdcff" id="wordCounter">1 / 30</span></div><div class="tagline" id="category">SSC + Spoken English</div><div style="padding:18px 0 8px"><div class="word" id="word">Important</div><div class="meaning" id="meaning">গুরুত্বপূর্ণ</div><div class="muted" id="type">Adjective • উচ্চারণ: ইম-পোর-ট্যান্ট</div></div><div class="example"><b>Example:</b><div id="example">English is important for our future.</div><div class="muted" id="translation">ইংরেজি আমাদের ভবিষ্যতের জন্য গুরুত্বপূর্ণ।</div></div><div class="row"><button class="secondary" onclick="speakWord()">🔊 শুনো</button><button class="good" onclick="markKnown()">✓ শিখেছি</button><button class="bad" onclick="markWeak()">↻ আবার শিখব</button></div><div class="row" style="margin-top:10px"><button class="secondary" onclick="prevWord()">← আগের</button><button class="primary" onclick="nextWord()">পরের শব্দ →</button></div></div>
+ <div class="panel"><h3>✍️ নিজের বাক্য তৈরি করো</h3><p class="muted">আজকের শব্দ ব্যবহার করে একটি বাক্য লেখো।</p><input class="field" id="sentence" placeholder="Example: English is important..."><button class="primary" onclick="saveSentence()">বাক্য সেভ করো</button><div id="sentenceFeedback" class="muted"></div></div>
+</section>
+<section id="quiz" class="page hidden">
+ <div class="panel"><div class="toprow"><h2>🧠 Quick Quiz</h2><span class="pill" style="background:#eaf1ff;color:#1555e8;border-color:#cbdcff" id="quizCounter">1 / 10</span></div><p class="muted">বাংলা অর্থ দেখে সঠিক English word বেছে নাও।</p><h3 id="quizQuestion">“গুরুত্বপূর্ণ” এর ইংরেজি কোনটি?</h3><div id="choices"></div><div id="quizFeedback" class="example hidden"></div><button class="primary" id="nextQuiz" onclick="nextQuiz()" disabled>পরের প্রশ্ন →</button><p class="muted" id="quizScore"></p></div>
+ <div class="panel"><h3>↻ ভুল শব্দের অনুশীলন</h3><p class="muted">কুইজে ভুল হওয়া শব্দ এখানে জমা হবে।</p><button class="secondary" onclick="reviewWeak()">ভুল শব্দগুলো রিভিশন করো</button></div>
+</section>
+<section id="progress" class="page hidden">
+ <div class="panel"><h2>📈 তোমার অগ্রগতি</h2><div class="row"><div><h3 id="progressLearned">0</h3><span class="muted">শেখা শব্দ</span></div><div><h3 id="progressWeak">0</h3><span class="muted">দুর্বল শব্দ</span></div><div><h3 id="progressSentences">0</h3><span class="muted">নিজের বাক্য</span></div></div><p class="muted">শব্দ শেখার অগ্রগতি</p><div class="progress"><div id="allProgress"></div></div><p class="muted" id="allProgressText"></p><h3 style="margin-top:18px">দুর্বল শব্দের তালিকা</h3><div id="weakList"></div><h3 style="margin-top:18px">নিজের লেখা বাক্য</h3><div id="sentenceList" class="muted"></div><button class="bad" style="margin-top:16px;width:100%" onclick="resetProgress()">অগ্রগতি মুছে ফেলো</button></div>
+</section>
+<div class="footer">VocabMaster • Free student project • Version 1.0</div>
+</main>
+<script>
+const words=[
+{w:"Important",m:"গুরুত্বপূর্ণ",type:"Adjective",pron:"ইম-পোর-ট্যান্ট",ex:"English is important for our future.",bn:"ইংরেজি আমাদের ভবিষ্যতের জন্য গুরুত্বপূর্ণ।",cat:"SSC Writing"},
+{w:"Improve",m:"উন্নতি করা",type:"Verb",pron:"ইম-প্রুভ",ex:"I want to improve my English.",bn:"আমি আমার ইংরেজির উন্নতি করতে চাই।",cat:"Spoken English"},
+{w:"Necessary",m:"প্রয়োজনীয়",type:"Adjective",pron:"নেসে-সেরি",ex:"Water is necessary for life.",bn:"জীবনের জন্য পানি প্রয়োজনীয়।",cat:"SSC Writing"},
+{w:"Knowledge",m:"জ্ঞান",type:"Noun",pron:"নলেজ",ex:"Knowledge is power.",bn:"জ্ঞানই শক্তি।",cat:"SSC Writing"},
+{w:"Develop",m:"উন্নত করা / বিকশিত করা",type:"Verb",pron:"ডি-ভেলপ",ex:"We should develop good habits.",bn:"আমাদের ভালো অভ্যাস গড়ে তোলা উচিত।",cat:"SSC Writing"},
+{w:"Benefit",m:"উপকার / সুবিধা",type:"Noun",pron:"বেনিফিট",ex:"Reading has many benefits.",bn:"পড়ার অনেক উপকার আছে।",cat:"SSC Writing"},
+{w:"Harmful",m:"ক্ষতিকর",type:"Adjective",pron:"হার্মফুল",ex:"Smoking is harmful to health.",bn:"ধূমপান স্বাস্থ্যের জন্য ক্ষতিকর।",cat:"SSC Writing"},
+{w:"Opportunity",m:"সুযোগ",type:"Noun",pron:"অপরচুনিটি",ex:"This is a good opportunity.",bn:"এটি একটি ভালো সুযোগ।",cat:"Spoken English"},
+{w:"Environment",m:"পরিবেশ",type:"Noun",pron:"এনভায়রনমেন্ট",ex:"We should protect the environment.",bn:"আমাদের পরিবেশ রক্ষা করা উচিত।",cat:"SSC Writing"},
+{w:"Ability",m:"সামর্থ্য / যোগ্যতা",type:"Noun",pron:"অ্যাবিলিটি",ex:"Practice improves our ability.",bn:"অনুশীলন আমাদের যোগ্যতা বাড়ায়।",cat:"Spoken English"},
+{w:"Achieve",m:"অর্জন করা",type:"Verb",pron:"অ্যাচিভ",ex:"You can achieve your goal.",bn:"তুমি তোমার লক্ষ্য অর্জন করতে পারো।",cat:"Spoken English"},
+{w:"Avoid",m:"এড়িয়ে চলা",type:"Verb",pron:"অ্যাভয়েড",ex:"Avoid wasting time.",bn:"সময় নষ্ট করা এড়িয়ে চলো।",cat:"Spoken English"},
+{w:"Confident",m:"আত্মবিশ্বাসী",type:"Adjective",pron:"কনফিডেন্ট",ex:"Be confident when you speak.",bn:"কথা বলার সময় আত্মবিশ্বাসী হও।",cat:"Spoken English"},
+{w:"Decide",m:"সিদ্ধান্ত নেওয়া",type:"Verb",pron:"ডিসাইড",ex:"I decided to study today.",bn:"আমি আজ পড়ার সিদ্ধান্ত নিয়েছি।",cat:"Spoken English"},
+{w:"Explain",m:"ব্যাখ্যা করা",type:"Verb",pron:"এক্সপ্লেইন",ex:"Please explain this lesson.",bn:"দয়া করে এই পাঠটি ব্যাখ্যা করো।",cat:"Spoken English"},
+{w:"Although",m:"যদিও",type:"Conjunction",pron:"অল-দো",ex:"Although he is poor, he is honest.",bn:"যদিও সে গরিব, সে সৎ।",cat:"Grammar"},
+{w:"However",m:"তবে / যাই হোক",type:"Adverb",pron:"হাউ-এভার",ex:"It was hard; however, I tried.",bn:"এটি কঠিন ছিল; তবে আমি চেষ্টা করেছি।",cat:"SSC Writing"},
+{w:"Instead",m:"পরিবর্তে",type:"Adverb",pron:"ইন-স্টেড",ex:"Walk instead of taking a car.",bn:"গাড়ি নেওয়ার পরিবর্তে হাঁটো।",cat:"Spoken English"},
+{w:"Require",m:"প্রয়োজন হওয়া",type:"Verb",pron:"রিকোয়ার",ex:"This task requires patience.",bn:"এই কাজের জন্য ধৈর্য প্রয়োজন।",cat:"SSC Writing"},
+{w:"Reduce",m:"কমানো",type:"Verb",pron:"রিডিউস",ex:"We should reduce pollution.",bn:"আমাদের দূষণ কমানো উচিত।",cat:"SSC Writing"},
+{w:"Polite",m:"ভদ্র",type:"Adjective",pron:"পোলাইট",ex:"Please be polite to others.",bn:"দয়া করে অন্যদের সঙ্গে ভদ্র হও।",cat:"Spoken English"},
+{w:"Usually",m:"সাধারণত",type:"Adverb",pron:"ইউজুয়ালি",ex:"I usually study in the evening.",bn:"আমি সাধারণত সন্ধ্যায় পড়ি।",cat:"Spoken English"},
+{w:"Perhaps",m:"সম্ভবত",type:"Adverb",pron:"পারহ্যাপস",ex:"Perhaps he is at home.",bn:"সম্ভবত সে বাড়িতে আছে।",cat:"Spoken English"},
+{w:"Suggest",m:"পরামর্শ দেওয়া",type:"Verb",pron:"সাজেস্ট",ex:"Can you suggest a good book?",bn:"তুমি কি একটি ভালো বইয়ের পরামর্শ দিতে পারো?",cat:"Spoken English"},
+{w:"Responsible",m:"দায়িত্বশীল",type:"Adjective",pron:"রিসপনসিবল",ex:"We are responsible for our actions.",bn:"আমরা আমাদের কাজের জন্য দায়িত্বশীল।",cat:"SSC Writing"},
+{w:"Success",m:"সাফল্য",type:"Noun",pron:"সাকসেস",ex:"Hard work leads to success.",bn:"কঠোর পরিশ্রম সাফল্য আনে।",cat:"SSC Writing"},
+{w:"Fail",m:"ব্যর্থ হওয়া",type:"Verb",pron:"ফেইল",ex:"Never give up if you fail.",bn:"ব্যর্থ হলে কখনো হাল ছেড়ো না।",cat:"Spoken English"},
+{w:"Prefer",m:"বেশি পছন্দ করা",type:"Verb",pron:"প্রিফার",ex:"I prefer tea to coffee.",bn:"আমি কফির চেয়ে চা বেশি পছন্দ করি।",cat:"Spoken English"},
+{w:"Describe",m:"বর্ণনা করা",type:"Verb",pron:"ডিসক্রাইব",ex:"Describe your school in English.",bn:"ইংরেজিতে তোমার স্কুল বর্ণনা করো।",cat:"SSC Writing"},
+{w:"Peaceful",m:"শান্তিপূর্ণ",type:"Adjective",pron:"পিসফুল",ex:"We want a peaceful world.",bn:"আমরা একটি শান্তিপূর্ণ পৃথিবী চাই।",cat:"SSC Writing"}
+];
+const KEY="vocabmaster_sadik_v1";
+let state={known:[],weak:[],correctToday:0,goal:10,sentences:[],idx:0,quizIdx:0,quizAnswered:false,quizScore:0,quizCount:0,quizOrder:[]};
+try{const saved=JSON.parse(localStorage.getItem(KEY)||"null");if(saved)state={...state,...saved}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){};updateStats()}
+function updateStats(){document.getElementById("learnedStat").textContent=state.known.length;document.getElementById("weakStat").textContent=state.weak.length;document.getElementById("streakStat").textContent=state.correctToday;document.getElementById("goalText").textContent="দৈনিক লক্ষ্য: "+state.goal+"টি শব্দ";let pct=Math.min(100,Math.round(state.known.length/words.length*100));document.getElementById("homeProgress").style.width=pct+"%";document.getElementById("progressText").textContent=`${words.length}টির মধ্যে ${state.known.length}টি শব্দ শিখেছ (${pct}%)`;document.getElementById("progressLearned").textContent=state.known.length;document.getElementById("progressWeak").textContent=state.weak.length;document.getElementById("progressSentences").textContent=state.sentences.length;document.getElementById("allProgress").style.width=pct+"%";document.getElementById("allProgressText").textContent=`${pct}% শব্দ শেখা হয়েছে`;renderWeak()}
+function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("hidden",p.id!==id));document.querySelectorAll(".navbtn").forEach(b=>b.classList.toggle("active",b.dataset.page===id));if(id==="progress")renderWeak();if(id==="quiz"&&!state.quizOrder.length)startQuiz();window.scrollTo({top:0,behavior:"smooth"})}
+document.querySelectorAll(".navbtn").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
+function renderWord(){let x=words[state.idx];word.textContent=x.w;meaning.textContent=x.m;type.textContent=x.type+" • উচ্চারণ: "+x.pron;example.textContent=x.ex;translation.textContent=x.bn;category.textContent=x.cat;wordCounter.textContent=(state.idx+1)+" / "+words.length;sentence.value="";sentenceFeedback.textContent=""}
+function nextWord(){state.idx=(state.idx+1)%words.length;save();renderWord()}function prevWord(){state.idx=(state.idx-1+words.length)%words.length;save();renderWord()}
+function markKnown(){if(!state.known.includes(state.idx))state.known.push(state.idx);state.weak=state.weak.filter(i=>i!==state.idx);save();nextWord()}
+function markWeak(){if(!state.weak.includes(state.idx))state.weak.push(state.idx);state.known=state.known.filter(i=>i!==state.idx);save();nextWord()}
+function speakWord(){if("speechSynthesis"in window){let u=new SpeechSynthesisUtterance(words[state.idx].w);u.lang="en-US";speechSynthesis.speak(u)}else alert("এই ব্রাউজারে উচ্চারণ শোনার সুবিধা নেই।")}
+function saveSentence(){let s=sentence.value.trim();if(!s){sentenceFeedback.textContent="আগে একটি বাক্য লেখো।";return}state.sentences.unshift({word:words[state.idx].w,text:s});save();sentence.value="";sentenceFeedback.textContent="বাক্য সেভ হয়েছে! Progress-এ দেখতে পারবে।"}
+function setGoal(n){state.goal=n;save()}
+function startQuiz(){state.quizOrder=[];let pool=state.weak.length?state.weak.concat(words.map((_,i)=>i).filter(i=>!state.weak.includes(i))):words.map((_,i)=>i);state.quizOrder=pool.sort(()=>Math.random()-.5).slice(0,10);state.quizIdx=0;state.quizAnswered=false;state.quizScore=0;state.quizCount=0;renderQuiz()}
+function renderQuiz(){if(!state.quizOrder.length)startQuiz();let ix=state.quizOrder[state.quizIdx];let x=words[ix];quizCounter.textContent=Math.min(state.quizIdx+1,10)+" / 10";quizQuestion.textContent='“'+x.m+'” এর ইংরেজি কোনটি?';quizFeedback.classList.add("hidden");nextQuiz.disabled=true;nextQuiz.textContent=state.quizIdx===9?"ফলাফল দেখো →":"পরের প্রশ্ন →";quizScore.textContent="স্কোর: "+state.quizScore;let opts=[x];while(opts.length<4){let y=words[Math.floor(Math.random()*words.length)];if(!opts.some(o=>o.w===y.w))opts.push(y)}opts.sort(()=>Math.random()-.5);choices.innerHTML="";opts.forEach(o=>{let b=document.createElement("button");b.className="choice";b.textContent=o.w;b.onclick=()=>answerQuiz(b,o,ix);choices.appendChild(b)})}
+function answerQuiz(btn,o,ix){if(state.quizAnswered)return;state.quizAnswered=true;let right=words[ix];let fb=quizFeedback;fb.classList.remove("hidden");if(o.w===right.w){btn.classList.add("correct");fb.innerHTML="✅ সঠিক উত্তর!<br><b>"+right.w+"</b> = "+right.m;state.quizScore++;state.correctToday++;state.weak=state.weak.filter(i=>i!==ix);if(!state.known.includes(ix))state.known.push(ix)}else{btn.classList.add("wrong");[...choices.children].forEach(b=>{if(b.textContent===right.w)b.classList.add("correct")});fb.innerHTML="❌ সঠিক উত্তর: <b>"+right.w+"</b> = "+right.m+"<br>"+right.ex;if(!state.weak.includes(ix))state.weak.push(ix);state.known=state.known.filter(i=>i!==ix)}state.quizCount++;save();quizScore.textContent="স্কোর: "+state.quizScore;nextQuiz.disabled=false}
+function nextQuiz(){if(!state.quizAnswered)return;if(state.quizIdx>=9){quizQuestion.textContent="কুইজ শেষ! তোমার স্কোর "+state.quizScore+"/10";choices.innerHTML="";quizFeedback.classList.remove("hidden");quizFeedback.textContent=state.quizScore>=8?"দারুণ! এভাবেই অনুশীলন চালিয়ে যাও।":"ভালো চেষ্টা! ভুল শব্দগুলো আবার অনুশীলন করো।";nextQuiz.textContent="আবার কুইজ দাও";nextQuiz.disabled=false;nextQuiz.onclick=startQuiz;return}state.quizIdx++;state.quizAnswered=false;nextQuiz.onclick=nextQuiz;renderQuiz()}
+function reviewWeak(){if(!state.weak.length){alert("এখনো ভুল শব্দ নেই। কুইজ দিয়ে অনুশীলন করো!");return}state.idx=state.weak[0];renderWord();showPage("learn")}
+function renderWeak(){weakList.innerHTML="";if(!state.weak.length)weakList.innerHTML='<p class="muted">এখনো কোনো দুর্বল শব্দ নেই। দারুণ! কুইজ দিয়ে চালিয়ে যাও।</p>';state.weak.forEach(i=>{let x=words[i],d=document.createElement("div");d.className="wordrow";let a=document.createElement("div");a.innerHTML="<b>"+x.w+"</b><div class='muted'>"+x.m+"</div>";let b=document.createElement("button");b.className="smallbtn";b.textContent="অনুশীলন";b.onclick=()=>{state.idx=i;renderWord();showPage("learn")};d.append(a,b);weakList.appendChild(d)});sentenceList.innerHTML=state.sentences.length?state.sentences.map(s=>"<div class='wordrow'><div><b>"+escapeHtml(s.word)+"</b><div>"+escapeHtml(s.text)+"</div></div></div>").join(""):"এখনো কোনো বাক্য সেভ করোনি।"}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function resetProgress(){if(confirm("তোমার সব অগ্রগতি মুছে ফেলবে?")){state.known=[];state.weak=[];state.correctToday=0;state.sentences=[];save();renderWeak()}}
+renderWord();updateStats();startQuiz();
+</script>
+
+<script>
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {}));
+}
+</script>
+
+</body></html>

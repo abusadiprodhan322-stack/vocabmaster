@@ -1,0 +1,37 @@
+{
+  "id": "./",
+  "name": "VocabMaster — SSC + Spoken English",
+  "short_name": "VocabMaster",
+  "description": "Learn English vocabulary with Bangla meanings, examples, quizzes and revision.",
+  "lang": "bn",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f4f7ff",
+  "theme_color": "#1246d8",
+  "categories": [
+    "education",
+    "books"
+  ],
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
